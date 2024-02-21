@@ -53,8 +53,8 @@
         lawyer.
       </p>
       <p>Contact me: XXXXXXXXX</p>
-
-    <h1>Leave a Review</h1>
+     <div id="reviewDisplay"></div>
+  <h1>Leave a Review</h1>
     <form id="reviewForm">
         <label for="name">Your Name:</label>
         <input type="text" id="name" name="name" required>
@@ -64,7 +64,6 @@
         <textarea id="comment" name="comment" rows="4" required></textarea>
         <input type="submit" value="Submit Review">
     </form>
-    
   </body>
 
   <script>
@@ -109,8 +108,11 @@
                 // Append error messages to form
                 document.getElementById("reviewForm").appendChild(errorContainer);
             } else {
-                // If no errors, submit form (this is where you would handle form submission via AJAX or other client-side logic)
-                alert("Form submitted successfully!");
+                // If no errors, create paragraph with review details
+                var reviewParagraph = document.createElement("p");
+                reviewParagraph.textContent = "Name: " + name + ", Rating: " + rating + ", Review: " + comment;
+                // Append review paragraph to review display area
+                document.getElementById("reviewDisplay").appendChild(reviewParagraph);
             }
         });
     </script>
