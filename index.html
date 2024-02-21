@@ -53,5 +53,66 @@
         lawyer.
       </p>
       <p>Contact me: XXXXXXXXX</p>
+
+    <h1>Leave a Review</h1>
+    <form id="reviewForm">
+        <label for="name">Your Name:</label>
+        <input type="text" id="name" name="name" required>
+        <label for="rating">Rating (1-5):</label>
+        <input type="number" id="rating" name="rating" min="1" max="5" required>
+        <label for="comment">Your Review:</label>
+        <textarea id="comment" name="comment" rows="4" required></textarea>
+        <input type="submit" value="Submit Review">
+    </form>
+    
   </body>
+
+  <script>
+        // Add event listener for form submission
+        document.getElementById("reviewForm").addEventListener("submit", function(event) {
+            // Prevent default form submission
+            event.preventDefault();
+
+            // Validate form fields
+            var name = document.getElementById("name").value;
+            var rating = document.getElementById("rating").value;
+            var comment = document.getElementById("comment").value;
+            var errors = [];
+
+            if (name.trim() === "") {
+                errors.push("Please enter your name.");
+            }
+
+            if (isNaN(rating) || rating < 1 || rating > 5) {
+                errors.push("Please enter a valid rating between 1 and 5.");
+            }
+
+            if (comment.trim() === "") {
+                errors.push("Please enter your review.");
+            }
+
+            // Display errors or submit form
+            if (errors.length > 0) {
+                // Display error messages
+                var errorContainer = document.createElement("div");
+                errorContainer.className = "error";
+                errors.forEach(function(errorMsg) {
+                    var errorParagraph = document.createElement("p");
+                    errorParagraph.textContent = errorMsg;
+                    errorContainer.appendChild(errorParagraph);
+                });
+                // Remove previous error messages if any
+                var existingErrorContainer = document.querySelector(".error");
+                if (existingErrorContainer) {
+                    existingErrorContainer.remove();
+                }
+                // Append error messages to form
+                document.getElementById("reviewForm").appendChild(errorContainer);
+            } else {
+                // If no errors, submit form (this is where you would handle form submission via AJAX or other client-side logic)
+                alert("Form submitted successfully!");
+            }
+        });
+    </script>
+  
 </html>
